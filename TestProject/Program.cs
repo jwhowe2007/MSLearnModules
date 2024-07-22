@@ -1,16 +1,17 @@
 ﻿string[] students = ["Sophia", "Andrew", "Emma", "Logan", "Becky", "Magnus", "Astrid", "Zoltan"];
 
 int exams = 5;
-decimal[][] studentExamScores = [
-    [90, 86, 87, 98, 100, 94, 90], // Sophia
-    [92, 89, 81, 96, 90, 89], // Andrew
-    [90, 85, 87, 98, 68, 89, 89, 89], // Emma
-    [90, 95, 87, 88, 96, 96], // Logan
-    [92, 91, 90, 91, 92, 92, 92], // Becky
-    [84, 86, 88, 90, 92, 94, 96, 98], // Magnus
-    [80, 90, 100, 80, 90, 100, 80, 90], // Astrid
-    [91, 91, 91, 91, 91, 91, 91] // Zoltan
-];
+Dictionary<String, decimal[]> studentExamScoreResults = new()
+{
+    {"Sophia", [90, 96, 87, 98, 100, 94, 90]},
+    {"Andrew", [92, 89, 81, 96, 90, 89]},
+    {"Emma",   [90, 80, 70, 60, 50, 100, 100, 100, 100, 100]},
+    {"Logan",  [90, 95, 87, 88, 96, 96]},
+    {"Becky",  [92, 91, 90, 91, 92, 92, 92]},
+    {"Magnus", [84, 56, 88, 50, 52, 54, 96, 98]},
+    {"Astrid", [80, 90, 100, 80, 90, 100, 80, 90]},
+    {"Zoltan", [61, 61, 61, 61, 51, 61, 61]}
+};
 
 static decimal listSum(decimal[] list) {
     decimal sum = 0;
@@ -25,7 +26,8 @@ static decimal listSum(decimal[] list) {
 Console.WriteLine("Student\t\tGrade");
 
 int studentID = 0;
-foreach (decimal[] examScores in studentExamScores) {
+foreach (String studentName in students) {
+    decimal[] examScores = studentExamScoreResults[studentName];
     for (int i = exams; i < examScores.Length; i++) {
         examScores[i] = (int)(examScores[i] * 0.1m);
     }
