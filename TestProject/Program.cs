@@ -1,11 +1,15 @@
-﻿string[] students = ["Sophia", "Andrew", "Emma", "Logan"];
+﻿string[] students = ["Sophia", "Andrew", "Emma", "Logan", "Becky", "Magnus", "Astrid", "Zoltan"];
 
 int exams = 5;
 decimal[][] studentExamScores = [
-    [90, 86, 87, 98, 100, 94, 90],
-    [92, 89, 81, 96, 90, 89],
-    [90, 85, 87, 98, 68, 89, 89, 89],
-    [90, 95, 87, 88, 96, 96]
+    [90, 86, 87, 98, 100, 94, 90], // Sophia
+    [92, 89, 81, 96, 90, 89], // Andrew
+    [90, 85, 87, 98, 68, 89, 89, 89], // Emma
+    [90, 95, 87, 88, 96, 96], // Logan
+    [92, 91, 90, 91, 92, 92, 92], // Becky
+    [84, 86, 88, 90, 92, 94, 96, 98], // Magnus
+    [80, 90, 100, 80, 90, 100, 80, 90], // Astrid
+    [91, 91, 91, 91, 91, 91, 91] // Zoltan
 ];
 
 static decimal listSum(decimal[] list) {
