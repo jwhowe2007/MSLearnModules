@@ -30,29 +30,29 @@ foreach (decimal[] examScores in studentExamScores) {
     decimal studentExamAverage = listSum(examScores) / (decimal)exams;
     string examAvgLetterGrade = "F";
 
-    if (studentExamAverage >= 97 && studentExamAverage <= 100) {
+    if (studentExamAverage >= 97) {
         examAvgLetterGrade = "A+";
-    } else if (studentExamAverage >= 93 && studentExamAverage < 97) {
+    } else if (studentExamAverage >= 93) {
         examAvgLetterGrade = "A";
-    } else if (studentExamAverage >= 90 && studentExamAverage < 93) {
+    } else if (studentExamAverage >= 90) {
         examAvgLetterGrade = "A-";
-    } else if (studentExamAverage >= 87 && studentExamAverage < 90) {
+    } else if (studentExamAverage >= 87) {
         examAvgLetterGrade = "B+";
-    } else if (studentExamAverage >= 83 && studentExamAverage < 87) {
+    } else if (studentExamAverage >= 83) {
         examAvgLetterGrade = "B";
-    } else if (studentExamAverage >= 80 && studentExamAverage < 83) {
+    } else if (studentExamAverage >= 80) {
         examAvgLetterGrade = "B-";
-    } else if (studentExamAverage >= 77 && studentExamAverage < 80) {
+    } else if (studentExamAverage >= 77) {
         examAvgLetterGrade = "C+";
-    } else if (studentExamAverage >= 73 && studentExamAverage < 77) {
+    } else if (studentExamAverage >= 73) {
         examAvgLetterGrade = "C";
-    } else if (studentExamAverage >= 70 && studentExamAverage < 73) {
+    } else if (studentExamAverage >= 70) {
         examAvgLetterGrade = "C-";
-    } else if (studentExamAverage >= 67 && studentExamAverage < 70) {
+    } else if (studentExamAverage >= 67) {
         examAvgLetterGrade = "D+";
-    } else if (studentExamAverage >= 63 && studentExamAverage < 67) {
+    } else if (studentExamAverage >= 63) {
         examAvgLetterGrade = "D";
-    } else if (studentExamAverage >= 60 && studentExamAverage < 63) {
+    } else if (studentExamAverage >= 60) {
         examAvgLetterGrade = "D-";
     }
 
