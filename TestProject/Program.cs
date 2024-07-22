@@ -1,66 +1,77 @@
-﻿string[] students = ["Sophia", "Andrew", "Emma", "Logan", "Becky", "Magnus", "Astrid", "Zoltan"];
+﻿string[] students = ["Sophia", "Andrew", "Emma", "Logan"];
 
 int exams = 5;
 Dictionary<String, decimal[]> studentExamScoreResults = new()
 {
-    {"Sophia", [90, 96, 87, 98, 100, 94, 90]},
+    {"Sophia", [90, 86, 87, 98, 100, 94, 90]},
     {"Andrew", [92, 89, 81, 96, 90, 89]},
-    {"Emma",   [90, 80, 70, 60, 50, 100, 100, 100, 100, 100]},
+    {"Emma",   [90, 85, 87, 98, 68, 89, 89, 89]},
     {"Logan",  [90, 95, 87, 88, 96, 96]},
-    {"Becky",  [92, 91, 90, 91, 92, 92, 92]},
-    {"Magnus", [84, 56, 88, 50, 52, 54, 96, 98]},
-    {"Astrid", [80, 90, 100, 80, 90, 100, 80, 90]},
-    {"Zoltan", [61, 61, 61, 61, 51, 61, 61]}
 };
 
-static decimal listSum(decimal[] list) {
-    decimal sum = 0;
+/*
+ * Computes the sum of a list with optional lowerLimit and upperLimit, which totals a select slice of the given array.
+ * If the upperLimit is blank or 0, set the max count to the length of the array.
+ */
+static decimal listSum(decimal[] list, int lowerLimit, int upperLimit) {
+    decimal sum = 0.00m;
 
-    foreach (decimal listItem in list) {
-        sum += listItem;
+    int max = upperLimit == 0 ? list.Length : upperLimit;
+    int min = lowerLimit;
+
+    for (int index = min; index < max; index++) {
+        sum += list[index];
     }
 
     return sum;
 }
 
-Console.WriteLine("Student\t\tGrade");
+Console.WriteLine("Student\t\tExam Score\tOverall\t\tGrade\t\tExtra Credit");
 
 int studentID = 0;
 foreach (String studentName in students) {
     decimal[] examScores = studentExamScoreResults[studentName];
-    for (int i = exams; i < examScores.Length; i++) {
-        examScores[i] = (int)(examScores[i] * 0.1m);
-    }
 
     // Each entry is a student's list of exam scores
-    decimal studentExamAverage = listSum(examScores) / (decimal)exams;
+    decimal studentExamAverage = listSum(examScores, 0, exams) / (decimal)exams;
+
+    // Extra credit scores get a weight of 10% of the extra credit score total.
+    decimal extraCreditScores = listSum(examScores, exams, 0) * 0.1m;
+
+    // Overall average grade including extra credit, used to calculate letter grade
+    decimal overallExamGrade = (listSum(examScores, 0, exams) + extraCreditScores) / (decimal)exams;
+
+    // Extra credit scores - average is the unweighted extra credit score divided by the number of extra credit assignments completed.
+    decimal extraCreditAverage = extraCreditScores * 10 / (decimal)(examScores.Length - exams);
+    decimal extraCreditPoints = extraCreditScores / (decimal)exams;
+
     string examAvgLetterGrade = "F";
 
-    if (studentExamAverage >= 97) {
+    if (overallExamGrade >= 97) {
         examAvgLetterGrade = "A+";
-    } else if (studentExamAverage >= 93) {
+    } else if (overallExamGrade >= 93) {
         examAvgLetterGrade = "A";
-    } else if (studentExamAverage >= 90) {
+    } else if (overallExamGrade >= 90) {
         examAvgLetterGrade = "A-";
-    } else if (studentExamAverage >= 87) {
+    } else if (overallExamGrade >= 87) {
         examAvgLetterGrade = "B+";
-    } else if (studentExamAverage >= 83) {
+    } else if (overallExamGrade >= 83) {
         examAvgLetterGrade = "B";
-    } else if (studentExamAverage >= 80) {
+    } else if (overallExamGrade >= 80) {
         examAvgLetterGrade = "B-";
-    } else if (studentExamAverage >= 77) {
+    } else if (overallExamGrade >= 77) {
         examAvgLetterGrade = "C+";
-    } else if (studentExamAverage >= 73) {
+    } else if (overallExamGrade >= 73) {
         examAvgLetterGrade = "C";
-    } else if (studentExamAverage >= 70) {
+    } else if (overallExamGrade >= 70) {
         examAvgLetterGrade = "C-";
-    } else if (studentExamAverage >= 67) {
+    } else if (overallExamGrade >= 67) {
         examAvgLetterGrade = "D+";
-    } else if (studentExamAverage >= 63) {
+    } else if (overallExamGrade >= 63) {
         examAvgLetterGrade = "D";
-    } else if (studentExamAverage >= 60) {
+    } else if (overallExamGrade >= 60) {
         examAvgLetterGrade = "D-";
     }
 
-    Console.WriteLine($"{students[studentID++]}:\t\t{studentExamAverage}\t{examAvgLetterGrade}");
+    Console.WriteLine($"{students[studentID++]}:\t\t{studentExamAverage}\t\t{overallExamGrade}\t\t{examAvgLetterGrade}\t\t{extraCreditAverage} ({extraCreditPoints} pts)");
 }
