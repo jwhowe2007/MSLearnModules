@@ -25,8 +25,8 @@ while (!heroDead && !mobDead) {
 
     if (heroesTurn) {
         // Hero gets to attack
-        // Attack die is 1d6
-        heroAttack = d6.Next(1,7);
+        // Attack die is 1d10
+        heroAttack = d10.Next(1,11);
 
         // Mob rolls for defense (1d4)
         mobDefense += d4.Next(1,5);
@@ -47,8 +47,8 @@ while (!heroDead && !mobDead) {
 
     if (mobsTurn) {
         // Mob gets to attack
-        // Mob rolls attack (1d6)
-        mobAttack = d6.Next(1,7);
+        // Mob rolls attack (1d10)
+        mobAttack = d10.Next(1,11);
 
         // Mob rolls for defense (1d4)
         heroDefense += d4.Next(1,5);
@@ -71,11 +71,15 @@ while (!heroDead && !mobDead) {
     Console.WriteLine($"MOB has {mobHP} HP.\n\n");
 }
 
-if (mobDead) {
-    Console.WriteLine("MOB is dead.");
+if (mobDead && !heroDead) {
+    Console.WriteLine("MOB is dead. Hero wins!");
 }
 
-if (heroDead) {
-    Console.WriteLine("Hero is dead.");
+if (heroDead && !mobDead) {
+    Console.WriteLine("Hero is dead. Mob wins!");
+}
+
+if (heroDead && mobDead) {
+    Console.WriteLine("Hero and MOB killed each other. Nobody wins.");
 }
 
