@@ -284,8 +284,8 @@ do
             for (int id = 0; id < 8; id++) {
                 // If an age string is ?, "" or " ", convert it to "0".
                 string[] emptyValues = ["?", "", " "];
-                string age = ourAnimals[id, 2];
-                age = age.Remove(age.IndexOf("Age: "), age.Length - 2).Trim();
+                string[] ageChunks = ourAnimals[id, 2].Split("Age: ");
+                string age = ageChunks[1].Trim();
 
                 if (emptyValues.Contains<string>(age)) {
                     ourAnimals[id, 2] = "Age: 0";
