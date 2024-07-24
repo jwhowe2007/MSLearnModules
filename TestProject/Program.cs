@@ -296,7 +296,7 @@ do
                 physicalDesc = physicalDesc.Remove(physicalDesc.IndexOf("Physical description: ")).Trim();
 
                 if (physicalDesc == "") {
-                    ourAnimals[id, 4] = "Physical description: None given.";
+                    ourAnimals[id, 4] = "Physical description: An animal.";
                 }
             }
 
@@ -306,7 +306,21 @@ do
 
         case "4":
             // Ensure animal nicknames and personality descriptions are complete
-            Console.WriteLine("Challenge Project - please check back soon to see progress.");
+            for (int id = 0; id < 8; id++) {
+                // Fix the nickname - if none is given, provide a default nickname
+                string nickname = ourAnimals[id, 3].Split("Nickname: ")[1].Trim();
+
+                if (nickname == "") {
+                    ourAnimals[id, 3] = "Nickname: Goober";
+                }
+
+                // Fix the personality description - if none is given, provide a default
+                string personality = ourAnimals[id, 5].Split("Personality: ")[1].Trim();
+
+                if (personality == "") {
+                    ourAnimals[id, 5] = "Personality description: Good with people.";
+                }
+            }
             Console.WriteLine("Press the Enter key to continue.");
             Console.ReadLine();
             break;
