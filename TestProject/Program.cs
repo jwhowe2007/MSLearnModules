@@ -292,8 +292,8 @@ do
                 }
 
                 // Now, fix the physical description
-                string physicalDesc = ourAnimals[id, 4];
-                physicalDesc = physicalDesc.Remove(physicalDesc.IndexOf("Physical description: ")).Trim();
+                // TODO: find a better way to do this - needs defensive programming and null checks, or a try-catch
+                string physicalDesc = ourAnimals[id, 4].Split("Physical description: ")[1].Trim();
 
                 if (physicalDesc == "") {
                     ourAnimals[id, 4] = "Physical description: An animal.";
@@ -308,6 +308,7 @@ do
             // Ensure animal nicknames and personality descriptions are complete
             for (int id = 0; id < 8; id++) {
                 // Fix the nickname - if none is given, provide a default nickname
+                // TODO: find a better way to do this - needs defensive programming and null checks, or a try-catch
                 string nickname = ourAnimals[id, 3].Split("Nickname: ")[1].Trim();
 
                 if (nickname == "") {
@@ -315,6 +316,7 @@ do
                 }
 
                 // Fix the personality description - if none is given, provide a default
+                // TODO: find a better way to do this - needs defensive programming and null checks, or a try-catch
                 string personality = ourAnimals[id, 5].Split("Personality: ")[1].Trim();
 
                 if (personality == "") {
