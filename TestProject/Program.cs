@@ -129,8 +129,14 @@ do
 
         case "2":
             // Display all dogs with a specified characteristic
-            Console.Write("Please enter the search term to look up by characteristic keyword: ");
-            string? searchTerm = Console.ReadLine();
+            Console.Write("Please enter the search terms (separated by commas) to look up by characteristic keyword: ");
+            string? searchTerms = Console.ReadLine();
+            string[] splitTerms = searchTerms == null ? [] : searchTerms.Split(',');
+
+            // Sort the terms alphabetically
+            splitTerms = [.. splitTerms.Order()];
+
+            int dogsMatched = 0;
 
             for (int animalIndex = 0; animalIndex < maxPets; animalIndex++) {
                 string species = ourAnimals[animalIndex, 1];
@@ -142,14 +148,27 @@ do
                     string personalityData = personality.Split("Personality: ")[1];
 
                     string searchTarget = physicalDescData + " " + personalityData;
+                    bool searchMatches = false;
 
-                    if (searchTerm != null && searchTarget.Contains(searchTerm)) {
+                    foreach (string term in splitTerms) {
+                        if (searchTarget.Contains(term)) {
+                            searchMatches = true;
+                            break;
+                        }
+                    }
+
+                    if (splitTerms.Length != 0 && searchMatches) {
+                        dogsMatched++;
                         for (int j = 0; j < (int)ourAnimals.Length / maxPets; j++) {
                             Console.WriteLine(ourAnimals[animalIndex, j]);
                         }
                         Console.WriteLine();
                     }
                 }
+            }
+
+            if (dogsMatched == 0) {
+                Console.WriteLine("No dogs matched the given search terms.");
             }
 
             Console.WriteLine("Press the Enter key to continue.");
