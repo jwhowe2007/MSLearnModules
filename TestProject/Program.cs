@@ -80,7 +80,13 @@ for (int i = 0; i < maxPets; i++)
     ourAnimals[i, 3] = "Nickname: " + animalNickname;
     ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
     ourAnimals[i, 5] = "Personality: " + animalPersonalityDescription;
-    ourAnimals[i, 6] = "Suggested Donation: " + animalSuggestedDonation;
+
+    // Try parsing the suggested donation into a decimal
+    if (!decimal.TryParse(animalSuggestedDonation, out decimal suggestedDonation))
+    {
+        suggestedDonation = 45.00m;
+    }
+    ourAnimals[i, 6] = $"Suggested Donation: {suggestedDonation:C2}";
 }
 
 // #5 display the top-level menu options
@@ -110,7 +116,7 @@ do
             {
                 if (ourAnimals[i, 0] != "ID #: ")
                 {
-                    for (int j = 0; j < (int)ourAnimals.Length / maxPets; j++)
+                    for (int j = 0; j < (int)(ourAnimals.Length / maxPets); j++)
                     {
                         Console.WriteLine(ourAnimals[i, j]);
                     }
