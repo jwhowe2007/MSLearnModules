@@ -69,13 +69,22 @@ void ShowFood()
 bool PlayerConsumedFood() {
     // If the leftmost x coordinate of the player equals the leftmost food coordinate,
     // the player is considered to have consumed the entire food item.
+
+    // Make sure we slurp up the food if we fly past it!
+    // The absolute distance between player position and food position should be
+
     if (speedFactor > 1) {
-        // Make sure we slurp up the food if we fly past it!
-        // The absolute distance between player position and food position should be
-        return Math.Abs(playerX - foodX) < speedFactor && Math.Abs(playerY - foodY) < speedFactor;
+        return ((Math.Abs(playerX - foodX) < speedFactor) && Math.Abs(playerY - foodY) < speedFactor);
     } else {
         return playerX == foodX && playerY == foodY;
     }
+    // return ((Math.Abs(playerX - foodX) < speedFactor) && playerY == foodY) || ((Math.Abs(playerY - foodY) < speedFactor) && playerX == foodX);
+    // if (speedFactor > 1) {
+
+    //     return Math.Abs(playerX - foodX) < speedFactor && Math.Abs(playerY - foodY) < speedFactor;
+    // } else {
+    //     return playerX == foodX && playerY == foodY;
+    // }
 }
 
 // Changes the player to match the food consumed
@@ -97,7 +106,7 @@ bool PlayerIsEnergized() {
 // Temporarily stops the player from moving
 void FreezePlayer()
 {
-    System.Threading.Thread.Sleep(1000);
+    Thread.Sleep(1000);
     player = states[0];
 }
 
